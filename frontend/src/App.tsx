@@ -3,7 +3,7 @@ import { WagmiProvider, useAccount } from 'wagmi'
 import { config } from '../config'
 import { Account } from '../account'
 import { WalletOptions } from './wallet-options'
-
+import Form from './form'
 const queryClient = new QueryClient()
 
 function ConnectWallet() {
@@ -17,6 +17,7 @@ export function App() {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <ConnectWallet />
+        <Form />
       </QueryClientProvider>
     </WagmiProvider>
   )

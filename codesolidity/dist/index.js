@@ -16,9 +16,11 @@ const express_1 = __importDefault(require("express"));
 const bip39_1 = require("bip39");
 const ethers_1 = require("ethers");
 const config_1 = require("./config");
+const cors_1 = __importDefault(require("cors"));
 console.log(config_1.Mnemonics);
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
+app.use((0, cors_1.default)());
 // Keep track of how many wallets have been generated
 let currentIndex = 0;
 // Function to generate a new ETH wallet address from mnemonic
@@ -59,5 +61,5 @@ app.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 }));
 app.listen(3000, () => {
-    console.log("Server running on http://localhost:3000");
+    console.log("Server running on http://localhost:5173");
 });

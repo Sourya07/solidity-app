@@ -4,10 +4,15 @@ import { mnemonicToSeed, validateMnemonic } from "bip39";
 import { Wallet, HDNodeWallet } from "ethers";
 
 import { Mnemonics } from "./config";
+import cors from 'cors'
 console.log(Mnemonics)
 
 const app = express();
 app.use(express.json());
+
+
+
+app.use(cors())
 
 // Keep track of how many wallets have been generated
 let currentIndex = 0;
@@ -21,7 +26,7 @@ const generateNewWallet = async (Mnemonics: string, index: number) => {
     const hdNode = HDNodeWallet.fromSeed(seed);
 
     // Standard Ethereum derivation path: m/44'/60'/0'/0/index
-    const derivationPath = `m/44'/60'/0'/0/${index}`;
+    const derivationPath = `m/44'/60'/0'/${index}/0`;
     const child = hdNode.derivePath(derivationPath);
     console.log(child)
     const wallet = new Wallet(child.privateKey);
@@ -57,5 +62,5 @@ app.post("/signup", async (req: Request, res: Response) => {
 });
 
 app.listen(3000, () => {
-    console.log("Server running on http://localhost:3000");
+    console.log("Server running on http://localhost:5173");
 });
